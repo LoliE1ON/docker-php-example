@@ -6,12 +6,20 @@ services:
     volumes:
       - ./docker/nginx:/etc/nginx/conf.d
       - ./app/server:/var/server
+      - ./docker/volumes/logs:/var/log/nginx
     ports:
       - 8080:80
     links:
       - php
+    depends_on:
+      - php
+
   php:
-    build: ./docker/php
+    build:
+      context: ./
+      dockerfile: ./docker/php/Dockerfile
+    working_dir: /var/server
+    command: bash -c "cp -R /var/composer/vendor /var/server |& php-fpm"
     volumes:
       - ./app/server:/var/server
     links:
