@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d
+      - ./app/server:/var/server
+    ports:
+      - 8080:80
+    links:
+      - php
+  php:
+    build: ./docker/php
+    volumes:
+      - ./app/server:/var/server
+    links:
+      - mysql
+
+  mysql:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: db_server
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 1
+    volumes:
+        - ./docker/volumes/mysql:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    links:
+      - mysql
+    ports:
+      - 8081:8080
