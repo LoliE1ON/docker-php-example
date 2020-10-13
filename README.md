@@ -2,5 +2,5 @@
 Docker env for web development. Nginx, mysql, adminer, php
 
 Run: 
-#### docker-compose buil
-#### docker-compose up
+1. `docker-compose buil`
+2. `docker-compose up`
