@@ -2,7 +2,13 @@
 Docker env for web development. Nginx, mysql, adminer, php
 
 ### Configuration
-Copy env file `cp .env-example .env`
+Copy env file `cp .env-example .env`.
+
+Environment variables are thrown into the php container in `$ _ENV`.
+
+
+##### Build containers
+`docker-compose build`
 
 ### Run
-`sh .\scripts\dev.sh`
+`docker-compose up`
