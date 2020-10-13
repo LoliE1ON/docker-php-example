@@ -32,10 +32,10 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: 123
-      MYSQL_DATABASE: db_server
-      MYSQL_USER: user
-      MYSQL_PASSWORD: 1
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
         - ./docker/volumes/mysql:/var/lib/mysql
 
