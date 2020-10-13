@@ -1,6 +1,8 @@
 .DS_Store
-app/server/vendor
 docker/volumes
+
+app/server/vendor
+app/server/logs
 
 # Editor directories and files
 .idea
