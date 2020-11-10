@@ -26,6 +26,16 @@ services:
       - ./app/server:/var/server
     links:
       - mysql
+    depends_on:
+      - composer
+
+  composer:
+    restart: "no"
+    image: composer:latest
+    command: install
+    volumes:
+      - ./app/server:/var/server
+    working_dir: /var/server
 
   mysql:
     image: mysql
@@ -36,7 +46,7 @@ services:
     env_file:
       - ./.env
     volumes:
-        - ./docker/volumes/mysql:/var/lib/mysql
+      - ./docker/volumes/mysql:/var/lib/mysql
 
   adminer:
     image: adminer

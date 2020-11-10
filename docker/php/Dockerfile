@@ -1,16 +1,5 @@
-FROM composer:latest as vendor
-WORKDIR /var/composer
-COPY ./app/server/composer.json .
-RUN composer install \
-    --ignore-platform-reqs \
-    --no-interaction \
-    --no-plugins \
-    --no-scripts \
-    --prefer-dist
-
 FROM php:7.4-fpm
 WORKDIR /var/server
-COPY --from=vendor /var/composer/vendor /var/composer/vendor
 ADD ./docker/php/php.ini /usr/local/etc/php/conf.d/40-custom.ini
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
